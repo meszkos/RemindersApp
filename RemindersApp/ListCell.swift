@@ -9,30 +9,24 @@ import SwiftUI
 
 struct ListCell: View {
     
-    var icon: String
-    var iconColor: Color
-    var title: String
-    var number: String
+    var reminder: Reminder
     
     var body: some View {
         NavigationLink{
             //
         }label: {
             HStack{
-                Image(systemName: icon)
-                    .foregroundColor(iconColor)
+                Image(systemName: reminder.icon)
+                    .foregroundColor(getColor())
                     .font(.system(size: 25))
-                Text(title)
+                Text(reminder.title)
                     .foregroundColor(.black)
                 Spacer()
-                Text(number)
+                Text(reminder.number)
                     .foregroundColor(.gray)
                     .font(.system(size: 20))
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.gray)
-                    
             }
-            .padding(.horizontal)
+            //.padding(.horizontal)
         }
         
     }
@@ -40,6 +34,12 @@ struct ListCell: View {
 
 struct ListCell_Previews: PreviewProvider {
     static var previews: some View {
-        ListCell(icon: "bookmark.circle.fill", iconColor: .orange, title: "Reminders", number: "3")
+        ListCell(reminder: Reminder(id: 123, icon: "person",title: "Home", number: "10"))
     }
+}
+
+func getColor() -> Color{
+    let colors = [Color.green, Color.blue, Color.red, Color.purple, Color.orange, Color.yellow]
+    
+    return colors.randomElement()!
 }
